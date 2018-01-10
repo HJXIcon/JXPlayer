@@ -62,7 +62,12 @@ typedef void(^JXPlayerPlayVideoToolPlayingProgressBlock)(CGFloat progress);
 
 # pragma mark - Play video existed in disk.
 
-- (nullable JXPlayerPlayVideoToolItem *)playExistedVideoWithURL:(NSURL * _Nullable)url fullVideoCachePath:(NSString * _Nullable)fullVideoCachePath options:(JXPlayerOptions)options showOnView:(UIView * _Nullable)showView playingProgress:(JXPlayerPlayVideoToolPlayingProgressBlock _Nullable )progress error:(nullable JXPlayerPlayVideoToolErrorBlock)error;
+- (nullable JXPlayerPlayVideoToolItem *)playExistedVideoWithURL:(NSURL * _Nullable)url
+                                             fullVideoCachePath:(NSString * _Nullable)fullVideoCachePath
+                                                        options:(JXPlayerOptions)options
+                                                     showOnView:(UIView * _Nullable)showView
+                                                playingProgress:(JXPlayerPlayVideoToolPlayingProgressBlock _Nullable )progress
+                                                          error:(nullable JXPlayerPlayVideoToolErrorBlock)error;
 
 
 # pragma mark - Play video from Web.

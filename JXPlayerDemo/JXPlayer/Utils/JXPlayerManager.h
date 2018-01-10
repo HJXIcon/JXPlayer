@@ -93,7 +93,11 @@ typedef void(^JXPlayerCompletionBlock)(NSString * _Nullable fullVideoCachePath, 
 
 
 # pragma mark - Video Data Load And Play Video Options
-- (nullable id <JXPlayerOperation>)loadVideoWithURL:(nullable NSURL *)url showOnView:(nullable UIView *)showView options:(JXPlayerOptions)options progress:(nullable JXPlayerDownloaderProgressBlock)progressBlock completed:(nullable JXPlayerCompletionBlock)completedBlock;
+- (nullable id <JXPlayerOperation>)loadVideoWithURL:(nullable NSURL *)url
+                                         showOnView:(nullable UIView *)showView
+                                            options:(JXPlayerOptions)options
+                                           progress:(nullable JXPlayerDownloaderProgressBlock)progressBlock
+                                          completed:(nullable JXPlayerCompletionBlock)completedBlock;
 
 - (void)cancelAllDownloads;
 

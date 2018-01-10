@@ -59,7 +59,8 @@ typedef void(^JXPlayerStoreDataFinishedBlock)(NSUInteger storedSize, NSError * _
  @param completionBlock 完成回调block
  @return JXPlayerCacheToken
  */
-- (nullable JXPlayerCacheToken *)storeVideoData:(nullable NSData *)videoData expectedSize:(NSUInteger)expectedSize forKey:(nullable NSString *)key completion:(nullable JXPlayerStoreDataFinishedBlock)completionBlock;
+- (nullable JXPlayerCacheToken *)storeVideoData:(nullable NSData *)videoData
+                                   expectedSize:(NSUInteger)expectedSize forKey:(nullable NSString *)key completion:(nullable JXPlayerStoreDataFinishedBlock)completionBlock;
 
 /**
  取消视频写入

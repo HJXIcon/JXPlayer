@@ -259,7 +259,8 @@
 
 #pragma mark - Query and Retrieve Options
 
-- (nullable NSOperation *)queryCacheOperationForKey:(nullable NSString *)key done:(nullable JXPlayerCacheQueryCompletedBlock)doneBlock {
+- (nullable NSOperation *)queryCacheOperationForKey:(nullable NSString *)key
+                                               done:(nullable JXPlayerCacheQueryCompletedBlock)doneBlock {
     //如果对应的key为空，那么就直接返回
     if (!key) {
         if (doneBlock) {

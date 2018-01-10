@@ -143,7 +143,12 @@ static NSString *JXPlayerURL = @"www.HJXIcon.com";
 
 #pragma mark - Public
 
-- (nullable JXPlayerPlayVideoToolItem *)playExistedVideoWithURL:(NSURL * _Nullable)url fullVideoCachePath:(NSString * _Nullable)fullVideoCachePath options:(JXPlayerOptions)options showOnView:(UIView * _Nullable)showView playingProgress:(JXPlayerPlayVideoToolPlayingProgressBlock _Nullable )progress error:(nullable JXPlayerPlayVideoToolErrorBlock)error{
+- (nullable JXPlayerPlayVideoToolItem *)playExistedVideoWithURL:(NSURL * _Nullable)url
+                                             fullVideoCachePath:(NSString * _Nullable)fullVideoCachePath
+                                                        options:(JXPlayerOptions)options
+                                                     showOnView:(UIView * _Nullable)showView
+                                                playingProgress:(JXPlayerPlayVideoToolPlayingProgressBlock _Nullable )progress
+                                                          error:(nullable JXPlayerPlayVideoToolErrorBlock)error{
     
     if (fullVideoCachePath.length==0) {
         if (error) error([NSError errorWithDomain:@"the file path is disable" code:0 userInfo:nil]);

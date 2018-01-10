@@ -39,6 +39,11 @@ typedef NSMutableDictionary<NSString *, id> JXOperationsDictionary;
     
 }
 
+/**
+ 取消对应key的全部操作
+ 
+ @param key key
+ */
 - (void)jx_cancelVideoLoadOperationWithKey:(NSString *)key{
     // Cancel in progress downloader from queue.
     JXOperationsDictionary *operationDictionary = [self operationDictionary];

@@ -100,8 +100,12 @@
 
 
 #pragma mark - Public
-
-- (nullable id <JXPlayerOperation>)loadVideoWithURL:(nullable NSURL *)url showOnView:(nullable UIView *)showView options:(JXPlayerOptions)options progress:(nullable JXPlayerDownloaderProgressBlock)progressBlock completed:(nullable JXPlayerCompletionBlock)completedBlock{
+///  下载数据并播放
+- (nullable id <JXPlayerOperation>)loadVideoWithURL:(nullable NSURL *)url
+                                         showOnView:(nullable UIView *)showView
+                                            options:(JXPlayerOptions)options
+                                           progress:(nullable JXPlayerDownloaderProgressBlock)progressBlock
+                                          completed:(nullable JXPlayerCompletionBlock)completedBlock{
     
     // Very common mistake is to send the URL using NSString object instead of NSURL. For some strange reason, XCode won't
     // throw any warning for this type mismatch. Here we failsafe this error by allowing URLs to be passed as NSString.
@@ -119,16 +123,19 @@
     
     BOOL isFailedUrl = NO;
     if (url) {
+        /// 并发编程，那你肯定见过@synchronized这个结构。@synchronized这个结构发挥了和锁一样的作用：它避免了多个线程同时执行同一段代码。和使用NSLock进行创建锁、加锁、解锁相比，在某些情况下@synchronized会更方便、更易读。
         @synchronized (self.failedURLs) {
             isFailedUrl = [self.failedURLs containsObject:url];
         }
     }
     
     if (url.absoluteString.length == 0 || (!(options & JXPlayerRetryFailed) && isFailedUrl)) {
+        /// 1.失败回调
         [self callCompletionBlockForOperation:operation completion:completedBlock videoPath:nil error:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorFileDoesNotExist userInfo:nil] cacheType:JXPlayerCacheTypeNone url:url];
         return operation;
     }
     
+    /// 2.添加到执行操作
     @synchronized (self.runningOperations) {
         [self.runningOperations addObject:operation];
     }
@@ -141,10 +148,11 @@
     
     BOOL isFileURL = [url isFileURL];
     
-    // show progress view and activity indicator view if need.
+    /// show progress view and activity indicator view if need.
     [self showProgressViewAndActivityIndicatorViewForView:showView options:options];
     
     __weak typeof(showView) wShowView = showView;
+    /// 本地路径
     if (isFileURL) {
 #pragma mark - Local File
         // hide activity view.
@@ -592,7 +600,12 @@
     }
 }
 
-- (void)callCompletionBlockForOperation:(nullable JXPlayerCombinedOperation*)operation completion:(nullable JXPlayerCompletionBlock)completionBlock videoPath:(nullable NSString *)videoPath error:(nullable NSError *)error cacheType:(JXPlayerCacheType)cacheType url:(nullable NSURL *)url {
+- (void)callCompletionBlockForOperation:(nullable JXPlayerCombinedOperation*)operation
+                             completion:(nullable JXPlayerCompletionBlock)completionBlock
+                              videoPath:(nullable NSString *)videoPath
+                                  error:(nullable NSError *)error
+                              cacheType:(JXPlayerCacheType)cacheType
+                                    url:(nullable NSURL *)url {
     dispatch_main_async_safe(^{
         if (operation && !operation.isCancelled && completionBlock) {
             completionBlock(videoPath, error, cacheType, url);
